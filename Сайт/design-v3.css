@@ -86,23 +86,24 @@ blockquote{margin:28px 0 0;background:var(--rose);padding:25px;border-radius:20p
 .contact-band{background:linear-gradient(#60332d66,#60332d66),url('./assets/warm-burgundy-marble.png') center 48%/cover;color:var(--paper);text-align:center;flex-direction:column;gap:23px;padding:42px 30px}
 .contact-band h2{font-size:1.8rem;line-height:1.3}.contact-band p{color:#fff4eb;max-width:540px;margin:auto}.contact-band .button{background:transparent;border-color:#f5d9c9;color:var(--paper);border-radius:9px}.contact-band .button:hover{background:#fff4eb;color:var(--claret-dark)}
 @media(max-width:760px){.contact-band{display:flex;padding:32px 24px;gap:20px}.contact-band h2{font-size:1.5rem}.contact-band .button{margin-top:0}}
-.journey{margin:0 0 42px}.journey-hint{font-size:.875rem!important}
-.journey-map{position:relative;background:#f3ede2;border:1px solid #e5d9ca;border-radius:25px;padding:28px}
+.journey{margin:0 0 42px}.journey-hint{font-size:.8125rem!important;display:flex;align-items:center;gap:10px;padding:10px 15px;border:1px solid #a56465;border-radius:40px;background:linear-gradient(110deg,#f7eeea,#f4e6e2);color:var(--claret)!important;line-height:1.5}.journey-hint svg{width:24px;height:24px}.journey .section-heading{align-items:center;gap:24px}.journey .section-heading h2{max-width:620px}
+.journey-map{position:relative;background:#f6f0e7 url('./assets/journey-wind.svg') center / 100% 100% no-repeat;border:1px solid #e5d9ca;border-radius:25px;padding:28px}
 .journey-stops{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .stop-button{border:0;background:transparent;color:var(--ink);padding:0;text-align:center;display:flex;align-items:center;flex-direction:column;gap:13px;cursor:pointer;width:100%}
 .stop-number{display:grid;place-items:center;border:1px solid #b6927e;background:var(--paper);color:var(--claret);width:54px;height:54px;border-radius:50%;font-size:1rem;transition:background .2s,color .2s,box-shadow .2s}
 .stop-button:hover .stop-number,.stop-button:focus-visible .stop-number,.stop-button[aria-expanded=true] .stop-number{background:var(--claret-dark);color:var(--paper);box-shadow:0 0 0 7px #96505016}
-.stop-title{font-size:.9375rem;line-height:1.5;font-weight:500;max-width:190px;background:#f3ede2;padding:2px 4px;border-radius:5px}
+.stop-title{font-size:.9375rem;line-height:1.5;font-weight:500;max-width:190px;background:#f6f0e7ed;padding:2px 4px;border-radius:5px}
 .stop-note{position:relative;background:var(--paper);padding:23px 36px 23px 23px;border:1px solid var(--line);border-radius:16px;margin-top:17px;color:var(--ink);font-size:.9375rem;line-height:1.75;box-shadow:0 9px 25px #6341370a}
 .stop-note[hidden]{display:none}.note-close{display:none;position:absolute;right:4px;top:4px;border:0;background:transparent;color:var(--claret);width:34px;height:34px;font-size:1.4rem;cursor:pointer}
 .route-line{display:none;color:#b58270;pointer-events:none}.route-reveal{stroke-dasharray:1;stroke-dashoffset:0}
-.is-interactive .journey-map{min-height:420px;padding:0}
+.is-interactive .journey-map{min-height:270px;padding:0}
 .is-interactive .route-desktop{display:block;position:absolute;inset:0 0 auto;width:100%;height:270px}
-.is-interactive .journey-stops{display:block;position:relative;height:420px}
-.is-interactive .journey-stop{position:absolute;top:103px;left:11%;width:190px;transform:translateX(-50%)}
+.is-interactive .journey-stops{display:block;position:relative;height:270px}
+.is-interactive .journey-stop{position:absolute;top:103px;left:11%;width:min(190px,21%);transform:translateX(-50%)}
 .is-interactive .stop-2{left:37%;top:53px}.is-interactive .stop-3{left:63%;top:113px}.is-interactive .stop-4{left:89%;top:73px}
 .is-interactive .note-close{display:block}.is-interactive .stop-note{position:absolute;top:100%;width:290px;left:50%;transform:translateX(-50%);z-index:2;animation:note-appear .2s ease-out}
 .is-interactive .stop-1 .stop-note{left:0;transform:none}.is-interactive .stop-4 .stop-note{left:auto;right:0;transform:none}
+.is-interactive .journey-stop:has([aria-expanded=true]){z-index:3}.is-interactive:not(:has([aria-expanded=true])) .stop-1 .stop-number{background:#8b5759;color:var(--paper);box-shadow:0 0 0 6px #96505012}
 .awaiting-reveal .journey-map{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}.awaiting-reveal.is-visible .journey-map{opacity:1;transform:none}
 .awaiting-reveal .route-reveal{stroke-dashoffset:1}.awaiting-reveal.is-visible .route-reveal{stroke-dashoffset:0;transition:stroke-dashoffset 2.1s .2s ease-in-out}
 @keyframes note-appear{from{opacity:0;margin-top:24px}to{opacity:1;margin-top:17px}}

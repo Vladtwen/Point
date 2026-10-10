@@ -19,10 +19,20 @@ if (toggle && nav) {
 
 document.querySelectorAll('.journey').forEach(journey => {
   const stops = [...journey.querySelectorAll('.journey-stop')];
-  const closeNotes = () => stops.forEach(stop => {
+  const map = journey.querySelector('.journey-map');
+  const sizeOpenNote = () => {
+    map.style.minHeight = '';
+    if (matchMedia('(max-width: 760px)').matches) return;
+    const note = journey.querySelector('.stop-note:not([hidden])');
+    if (note) map.style.minHeight = Math.max(270, Math.ceil(note.getBoundingClientRect().bottom - map.getBoundingClientRect().top + 24)) + 'px';
+  };
+  const closeNotes = () => {
+    map.style.minHeight = '';
+    stops.forEach(stop => {
     stop.querySelector('.stop-button').setAttribute('aria-expanded', 'false');
     stop.querySelector('.stop-note').hidden = true;
-  });
+    });
+  };
   closeNotes();
   journey.classList.add('is-interactive');
   stops.forEach(stop => {
@@ -34,6 +44,7 @@ document.querySelectorAll('.journey').forEach(journey => {
       if (opening) {
         button.setAttribute('aria-expanded', 'true');
         note.hidden = false;
+        sizeOpenNote();
       }
     });
     stop.querySelector('.note-close').addEventListener('click', () => {
@@ -51,6 +62,7 @@ document.querySelectorAll('.journey').forEach(journey => {
   document.addEventListener('click', event => {
     if (!journey.contains(event.target)) closeNotes();
   });
+  window.addEventListener('resize', sizeOpenNote);
   if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     journey.classList.add('awaiting-reveal');
     const observer = new IntersectionObserver(entries => {
