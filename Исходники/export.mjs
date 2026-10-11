@@ -8,7 +8,7 @@ for(const entry of readdirSync(path.join(source,'dist'))){
   if(entry.startsWith('.'))continue;
   cpSync(path.join(source,'dist',entry),path.join(output,entry),{recursive:true});
 }
-writeFileSync(path.join(output,'ПРОЧИТАЙ МЕНЯ.txt'),`САЙТ ЕКАТЕРИНЫ ВОЛКОВОЙ — v8
+writeFileSync(path.join(output,'ПРОЧИТАЙ МЕНЯ.txt'),`САЙТ ЕКАТЕРИНЫ ВОЛКОВОЙ — v9
 
 ПРОСМОТР НА КОМПЬЮТЕРЕ
 Распакуйте весь архив в одну папку. Откройте index.html двойным кликом.

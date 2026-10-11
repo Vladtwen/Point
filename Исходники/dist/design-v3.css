@@ -118,10 +118,10 @@ blockquote{margin:28px 0 0;background:var(--rose);padding:25px;border-radius:20p
 }
 @media(prefers-reduced-motion:reduce){.awaiting-reveal .journey-map{opacity:1;transform:none;transition:none}.awaiting-reveal .route-reveal{stroke-dashoffset:0;transition:none!important}.stop-number,.stop-note{animation:none!important;transition:none}}
 
-/* Portrait reserved for the owner's photograph. */
+/* Owner portrait in the agreed circular frame. */
 .portrait-slot{width:min(224px,100%);aspect-ratio:1;border-radius:50%;border:1px solid #c7a99b;background:var(--rose);margin-top:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;color:var(--claret);box-shadow:inset 0 0 0 8px var(--paper)}
 .portrait-initials{font-size:3rem;line-height:1.2;font-weight:450;letter-spacing:-.04em}.portrait-hint{font-size:.875rem;color:var(--muted);margin-top:9px}
-.portrait-slot img{width:100%;height:100%;object-fit:cover;object-position:center}
+.portrait-slot img{width:100%;height:100%;object-fit:cover;object-position:45% 37%;transform:scale(1.16);transform-origin:45% 37%}
 .city-card img[src$="moscow.jpg"]{object-position:center top}.city-card img[src$="saratov.jpg"]{object-position:center 45%}
 @media(max-width:760px){.portrait-slot{width:190px;margin-top:24px}.portrait-initials{font-size:2.6rem}}
 
