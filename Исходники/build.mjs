@@ -18,8 +18,9 @@ const icons = {
   pin: svg('<path d="M25 13c0 7-9 15-9 15S7 20 7 13a9 9 0 1 1 18 0Z"/><circle cx="16" cy="13" r="3"/>'),
 };
 const brand = `<a class="brand" href="/" aria-label="Своё место — главная"><span class="brand-name">Своё место</span><span class="brand-sub">Недвижимость с личным участием</span></a>`;
+const homeBrand = `<div class="brand"><span class="brand-name">Своё место</span><span class="brand-sub">Недвижимость с личным участием</span></div>`;
 const links = [['/','Главная'],['/about/','Обо мне'],['/services/','Услуги'],['/reviews/','Отзывы'],['/contacts/','Контакты']];
-const header = path => `<a class="skip" href="#main">Перейти к содержанию</a><header class="site-header"><div class="wrap header-inner">${brand}<nav class="main-nav" id="main-nav" aria-label="Основная навигация">${links.map(([href,label])=>`<a href="${href}"${href===path?' aria-current="page"':''}>${label}</a>`).join('')}</nav><a class="header-contact" href="tel:+79033281398">+7 903 328-13-98</a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Меню</button></div></header>`;
+const header = path => `<a class="skip" href="#main">Перейти к содержанию</a><header class="site-header"><div class="wrap header-inner">${path==='/'?homeBrand:brand}<nav class="main-nav" id="main-nav" aria-label="Основная навигация">${links.map(([href,label])=>`<a href="${href}"${href===path?' aria-current="page"':''}>${label}</a>`).join('')}</nav><a class="header-contact" href="tel:+79033281398">+7 903 328-13-98</a><button class="menu-toggle" aria-expanded="false" aria-controls="main-nav" type="button">Меню</button></div></header>`;
 const footer = `<footer class="site-footer"><div class="wrap"><div class="footer-top">${brand}<p>Саратов — основная работа<br>Москва — через проверенных партнёров</p><a class="text-link" href="/contacts/">Обсудить вашу задачу</a></div><div class="footer-meta"><span>© ${new Date().getFullYear()} Своё место</span><a href="/photo-credits/">Фотографии</a><details class="footer-projects"><summary>Мои проекты <span aria-hidden="true">+</span></summary><div class="project-entry"><span class="eyebrow">Юридические услуги</span><h3>ООО «ПБ Консультант»</h3><p>Отдельный проект Екатерины Волковой.<br>Юридические услуги с 2004 года.</p><span class="project-pending">Ссылка скоро появится</span></div></details></div></div></footer>`;
 const favicon = 'data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="13" fill="#965050"/><path d="M10 19 20 10l10 9M13 17v13h14V17M18 30v-9h4v9" fill="none" stroke="#fffcf7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 function page(path,title,description,body){
@@ -29,19 +30,20 @@ function page(path,title,description,body){
   writeFileSync(`${folder}/index.html`,portableHtml(path,html));
   if(path==='/404/')writeFileSync('dist/404.html',portableHtml('/',html));
 }
-const contactBand = `<div class="wrap"><section class="contact-band"><div><h2>Давайте обсудим вашу задачу</h2><p>Первая консультация бесплатна. Расскажите о своих планах — обсудим вашу ситуацию и возможные следующие шаги.</p></div><a class="button" href="/contacts/">Обсудить вашу задачу ${icons.arrow}</a></section></div>`;
+const contactBand = `<div class="wrap"><section class="contact-band"><div><h2>Обсудим ваши планы</h2><p>Первая консультация бесплатна. Определим, какая помощь вам нужна и с чего начать.</p></div><a class="button" href="/contacts/">Связаться с Екатериной ${icons.arrow}</a></section></div>`;
+const contactInvite = `<div class="contact-invite"><a class="marble-cta" href="/contacts/"><span>Обсудить вашу задачу</span>${icons.arrow}</a></div>`;
 const serviceCards = `<div class="services-grid apartment-grid">${[
   ['Продать квартиру','Обоснованная цена, показы и переговоры. Помогу защитить ваши интересы и пройти сделку с вниманием к документам и расчётам.','sell'],
   ['Купить квартиру','Подбор под ваши планы, проверка истории объекта и собственника. Разберём риски и условия до принятия решения.','buy']
-].map(([title,text,anchor])=>`<a class="service-card" href="/services/#${anchor}"><h3>${title}</h3><p>${text}</p><span class="service-more">Подробнее ${icons.arrow}</span></a>`).join('')}</div><div class="other-services"><span>Также помогу:</span><a href="/services/#newbuild">Новостройки</a><a href="/services/#commercial">Коммерческая недвижимость</a><a href="/services/#rent">Аренда жилья</a></div>`;
+].map(([title,text,anchor])=>`<a class="service-card" href="/services/#${anchor}"><h3>${title}</h3><p>${text}</p><span class="service-more">Подробнее ${icons.arrow}</span></a>`).join('')}</div><nav class="other-services" aria-label="Другие направления"><p class="other-services-label">Другие направления</p><div class="other-services-links"><a href="/services/#newbuild">${icons.building}<span>Новостройки</span>${icons.arrow}</a><a href="/services/#commercial">${icons.commercial}<span>Коммерческая недвижимость</span>${icons.arrow}</a><a href="/services/#rent">${icons.home}<span>Аренда жилья</span>${icons.arrow}</a></div></nav>`;
 
 page('/','Продать или купить квартиру в Саратове','Более 20 лет в недвижимости. Продажа и покупка квартир в Саратове, работа в Москве через проверенных партнёров. Первая консультация бесплатна.',`
 <div class="wrap">
   <section class="welcome">
     <div class="welcome-intro">
-      <span class="location-label">Саратов · Москва через партнёров</span>
+      <span class="location-label">Саратов · Москва</span>
       <h1>Продать или купить квартиру.<br><span>С личным участием.</span></h1>
-      <p>Помогаю разобраться в цене, документах и условиях сделки. На стороне ваших интересов — от первого разговора до передачи ключей.</p>
+      <p>Помогаю разобраться в цене, документах и условиях сделки — от первого разговора до передачи ключей.</p>
       <div class="welcome-actions"><a class="button" href="/services/#sell">Продать квартиру ${icons.arrow}</a><a class="button" href="/services/#buy">Купить квартиру ${icons.arrow}</a></div><a class="consultation-note" href="/contacts/">Первая консультация — бесплатно</a>
     </div>
     <div class="home-scene">
@@ -50,7 +52,7 @@ page('/','Продать или купить квартиру в Саратов�
     </div>
   </section>
   <section class="section" id="directions"><div class="section-heading"><h2>С чем я помогу</h2><a class="text-link" href="/services/">Все услуги ${icons.arrow}</a></div>${serviceCards}</section>
-  <section class="personal-note"><div class="portrait-slot home-portrait" aria-label="Место для будущего портрета Екатерины"><span class="portrait-initials" aria-hidden="true">ЕВ</span><span class="portrait-hint">Екатерина</span></div><div class="personal-intro"><span class="personal-label">Давайте знакомиться</span><h2>Я — Екатерина.<br>И я на вашей стороне.</h2><a class="button button-light" href="/about/">Больше обо мне ${icons.arrow}</a></div><div class="personal-copy"><p>За каждой сделкой — человек, его планы и важные перемены. Поэтому моя работа начинается с того, чтобы вас услышать.</p><p>Более 20 лет я помогаю решать вопросы с недвижимостью. Объясняю сложное простыми словами, внимательно отношусь к документам и остаюсь рядом на каждом этапе.</p></div></section>
-  <section class="section city-section"><div class="section-heading"><h2>Саратов и Москва</h2><p>Основная работа — в Саратове.<br>В Москве организую работу через надёжных проверенных партнёров.</p></div><div class="cities"><article class="city-card"><img src="/assets/saratov.jpg" alt="Пешеходная улица Саратова с историческими зданиями и фонарями" width="736" height="1104" loading="lazy"><div class="city-caption"><h3>Саратов</h3></div></article><article class="city-card"><img src="/assets/moscow.jpg" alt="Панорама Москвы с высоткой на закате" width="1297" height="736" loading="lazy"><div class="city-caption"><h3>Москва</h3></div></article></div></section>
+  <section class="personal-note"><div class="portrait-slot home-portrait"><img src="/assets/ekaterina-portrait.jpg" alt="Екатерина Волкова" width="810" height="1080" loading="lazy" decoding="async"></div><div class="personal-intro"><span class="personal-label">Давайте знакомиться</span><h2>Я — Екатерина.<br>И я на вашей стороне.</h2><a class="button button-light" href="/about/">Больше обо мне ${icons.arrow}</a></div><div class="personal-copy"><p>За каждой сделкой — человек, его планы и важные перемены. Поэтому моя работа начинается с того, чтобы услышать вас.</p><p>Объясняю сложное простыми словами и помогаю сопоставить варианты. Решение остаётся за вами.</p></div></section>
+  <section class="section city-section city-section-compact" aria-labelledby="cities-title"><h2 id="cities-title">География работы</h2><div class="cities"><article class="city-card"><img src="/assets/saratov.jpg" alt="Пешеходная улица Саратова" width="736" height="1104" loading="lazy"><div class="city-caption"><h3>Саратов</h3><p>Личное сопровождение</p></div></article><article class="city-card"><img src="/assets/moscow.jpg" alt="Москва на закате" width="1297" height="736" loading="lazy"><div class="city-caption"><h3>Москва</h3><p>Проверенные партнёры</p></div></article></div></section>
 </div>${contactBand}`);
-export { page, contactBand, serviceCards, icons };
+export { page, contactBand, contactInvite, serviceCards, icons };
